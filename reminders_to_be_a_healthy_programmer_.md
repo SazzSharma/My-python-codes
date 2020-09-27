@@ -1,11 +1,10 @@
+
+
 #Progrm Name:Timer to make you  a healthy programmer
 from pygame import mixer
 import datetime
 import time
 d=datetime.datetime.now()
-
-
-
 def music1(file):
     mixer.init()
     mixer.music.load(file)
