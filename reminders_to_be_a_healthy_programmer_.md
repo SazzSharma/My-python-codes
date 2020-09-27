@@ -1,6 +1,4 @@
 
-
-#Progrm Name:Timer to make you  a healthy programmer
 from pygame import mixer
 import datetime
 import time
@@ -21,15 +19,12 @@ def music1(file):
 def gettime1():
     return datetime.datetime.now()
 
-
 water=time.time()
 eyes=time.time()
 physical=time.time()
 watertime=30*60
 physicaltime=60*60
 eyestime=45*60
-
-
 
 while(1):
     if time.time()-water>=watertime:
