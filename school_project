@@ -1,0 +1,209 @@
+function factorial(var1){
+    if(var1==0 || var1==1){
+        return 1;
+    }
+    return var1*factorial(var1 - 1);
+}
+function checkPalindrome(var1){
+    reverse=var1.split("").reverse().join("")
+    if(var1==reverse){
+        return "Palindrome";
+
+    }
+    else{
+        return "not a palindrome"
+    }
+}
+function checkFibbo(var1){
+    var a,b,c;
+
+ if((var1==0)||(var1==1))
+   return "Fibonacci Term"
+ else
+ {
+   a=0;
+   b=1;
+   c=a+b;
+   while(c<var1)
+   {
+     a=b;
+     b=c;
+     c=a+b;
+   }
+   if(c==var1)
+     return "Fibonacci Term";
+   else
+     return "Not a Fibonacci Term"
+ }
+ 
+ 
+}
+function primeOrComposite(n){
+    var  i, flag = 0;
+    
+    if (n == 1){
+      flag = 1;
+    }
+    else if(n==0){
+        return "Neither P or C"
+    }
+    for (i = 2; i <= n / 2; ++i) {
+  
+     
+      if (n % i == 0) {
+        flag = 1;
+        break;
+      }
+    }
+  
+    if (flag == 0){
+      return "Prime";
+    }
+    else{
+      return "Composite";
+    }
+}
+
+
+// let calcBody = document.getElementsByClassName("calc");
+// document.getElementById("calcu").onclick = function(){
+//     console.log("clicked");
+// }
+
+
+let screen= document.getElementById('screen'); 
+// took the screen from input tag of html
+buttons = document.querySelectorAll('button');
+// took button from html like above
+ let screenValue= '';
+// now the screen value(nos. in screen) is blank
+let modeValue = 0;
+console.log(modeValue)
+let mode = document.getElementById("mode");
+let modeDisplay = document.getElementById("modeDis");
+modeDisplay.value = "calc";
+let prevAnswer = "";
+for(item of buttons){
+
+    item.addEventListener('click',(e)=> {
+        buttonText = e.target.innerText;
+    
+/*venlisterner.... is used to take perticular no. which is clicked and kept in
+(e), e.target is clicked button, innerText gives me text form of tergeted button
+and saved in buttonText   */
+       // document.write('buttonText is ', buttonText); 
+// this step help to see clicked button in screen
+        
+
+        
+
+        if(buttonText=='×'){
+            
+            buttonText='*';
+           screenValue += buttonText;
+           screen.value = screenValue;
+
+        }
+
+        else if(buttonText == '÷'){
+            buttonText = '/';
+            screenValue += buttonText;
+            screen.value = screenValue;
+        }
+
+        else if (buttonText=='AC'){
+            modeValue = 0;
+            modeDisplay.value = "calc"
+            console.log(modeValue)
+            screenValue = "";
+           screen.value = screenValue;
+        }
+        
+        else if (buttonText =='=' && modeValue == 0){
+            if(screen.value.slice(-1)=="!"){
+                screen.value = factorial(screen.value.slice(0,-1));
+                
+
+            }
+            else{
+                prevAnswer = eval(screenValue);
+                screen.value=eval(screenValue);
+            }
+        
+
+        }
+        else if(buttonText == 'ans'){
+            screenValue += prevAnswer;
+            screen.value = screenValue;
+        }
+
+        else if(buttonText=='⬅'){
+           screenValue = screen.value.slice(0,-1);
+           screen.value = screenValue;
+    
+        }
+
+        else if(buttonText=='π'){
+           buttonText=3.14;
+           screenValue += buttonText;
+           screen.value = screenValue;
+        }
+        else if(buttonText=="!"){
+            buttonText="!";
+            screenValue+=buttonText;
+           screen.value = screenValue;
+
+            
+        }
+        // this function is used for others no. and symbol
+        
+        else if(buttonText == 'mode'){
+            modeValue += 1;
+            if(modeValue == 1){
+                modeDisplay.value = "palindrome";
+            }
+            else if(modeValue == 2){
+                modeDisplay.value = "fibo-Check";
+            }
+            else if(modeValue == 3){
+                modeDisplay.value = "Prime_Comp"
+            }
+            else if(modeValue==4){
+                modeValue=0;
+                modeDisplay.value="calc"
+            }
+            // console.log(modeValue);
+        }
+        else if(buttonText == "=" && modeValue==1){
+            a=checkPalindrome(screen.value);
+            document.getElementById("equal").onclick=screen.value=a;
+               
+            // if(modeValue == 1){
+            //     document.getElementById("equal").onclick = function(){
+            //         screen.value = 'check palindrome';
+            //     }
+            // }
+        }
+        else if( buttonText=="=" && modeValue==2){
+            screen.value=eval(screen.value);
+            document.getElementById("equal").onclick=screen.value=checkFibbo(screen.value);
+        }
+        else if(buttonText=="=" && modeValue ==3){
+            screen.value=eval(screen.value)
+            document.getElementById("equal").onclick=screen.value=primeOrComposite(screen.value);
+        }
+        else if(buttonText=="=" && modeValue>=4){
+            modeValue=0;
+        }
+                 
+        
+        else{
+           screenValue += buttonText;
+           screen.value = screenValue;
+        }
+        
+        
+        
+        
+    })
+}
